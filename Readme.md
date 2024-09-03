@@ -1,0 +1,1 @@
+- Página web que permite crear voluntariados y que usuarios puedan registrarse a ellos. Nada acá por ahora.
