@@ -5,7 +5,7 @@
 -- Dumped from database version 16.4
 -- Dumped by pg_dump version 16.4
 
--- Started on 2024-09-09 18:14:08
+-- Started on 2024-09-10 19:02:52
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,6 +18,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP DATABASE IF EXISTS bdwebvol;
 --
 -- TOC entry 4811 (class 1262 OID 16396)
 -- Name: bdwebvol; Type: DATABASE; Schema: -; Owner: postgres
@@ -40,25 +41,6 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- TOC entry 4 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
---
-
-CREATE SCHEMA public;
-
-
-ALTER SCHEMA public OWNER TO pg_database_owner;
-
---
--- TOC entry 4812 (class 0 OID 0)
--- Dependencies: 4
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 
 SET default_tablespace = '';
 
@@ -119,13 +101,14 @@ ALTER TABLE public.registros ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 CREATE TABLE public.usuarios (
     username text NOT NULL,
-    rol text NOT NULL,
-    nombre text,
-    apellido text,
-    email text,
+    password text NOT NULL,
+    nombre text NOT NULL,
+    apellido text NOT NULL,
+    email text NOT NULL,
     "compañia" text,
-    imagen_perfil text,
-    habilidades text
+    rol text NOT NULL,
+    habilidades text,
+    imagen_perfil text
 );
 
 
@@ -156,7 +139,7 @@ ALTER TABLE public.usuarios OWNER TO postgres;
 
 
 --
--- TOC entry 4813 (class 0 OID 0)
+-- TOC entry 4812 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: registrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -192,7 +175,7 @@ ALTER TABLE ONLY public.registros
 
 
 --
--- TOC entry 4643 (class 2606 OID 16493)
+-- TOC entry 4643 (class 2606 OID 16494)
 -- Name: usuarios users_role_check; Type: CHECK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -254,7 +237,7 @@ ALTER TABLE ONLY public.registros
     ADD CONSTRAINT registrations_user_id_fkey FOREIGN KEY (usuario_id) REFERENCES public.usuarios(username);
 
 
--- Completed on 2024-09-09 18:14:08
+-- Completed on 2024-09-10 19:02:52
 
 --
 -- PostgreSQL database dump complete
