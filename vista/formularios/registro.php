@@ -16,76 +16,56 @@
                         <div class="card-body">
                             <form class="needs-validation" novalidate>
                             <div class="form-row">
+                                <div class="col-md-7 mb-3">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Usuario123" required>
+                                </div>
                             <div class="col-md-7 mb-3">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Usuario123" required>
-                            </div>
-                            <div class="col-md-7 mb-3">
-                            <label for="pass">Contraseña</label>
-                            <input type="text" class="form-control" id="pass" placeholder="Contraseña%1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                            <div class="invalid-feedback">
-                            La contraseña debe tener minimo una (1) mayuscula, un (1) número y un (1) simbolo.
-                            </div>
+                                <label for="password">Contraseña</label>
+                                <input type="text" class="form-control" id="password" name="password" placeholder="Contraseña%1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                <div class="invalid-feedback">
+                                La contraseña debe tener minimo una (1) mayuscula, un (1) número y un (1) simbolo.
+                                </div>
                             </div>
                             <form class="needs-validation" novalidate>
-                            <div class="form-row">
-                            <div class="col-md-7 mb-3">
-                            <label for="usrnom">Nombre</label>
-                            <input type="text" class="form-control" id="usrnm" placeholder="Nombre" value="Adrian" required>
-                            </div>
-                            <div class="col-md-7 mb-3">
-                            <label for="usrapd">Apellido</label>
-                            <input type="text" class="form-control" id="usrapd" placeholder="Apellido" value="Perez" required>
-                            </div>
-                            <div class="col-md-7 mb-3">
-                            <label for="email">Email</label>
-                            <div class="input-group">
-                            <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            </div>
-                            <input type="text" class="form-control" id="email" placeholder=" Email " 
-                            aria-describedby="inputGroupPrepend" required>
-                            <div class="invalid-feedback">
-                            Email no valido.
-                            </div>
-                            </div>
-                            </div>
+                                <div class="form-row">
+                                <div class="col-md-7 mb-3">
+                                <label for="usrnom">Nombre</label>
+                                <input type="text" class="form-control" id="usrnom" placeholder="Nombre" name="usrnom" required>
+                                </div>
+                                <div class="col-md-7 mb-3">
+                                <label for="usrapd">Apellido</label>
+                                <input type="text" class="form-control" id="usrapd" placeholder="Apellido" name="usrapd" required>
+                                </div>
+                                <div class="col-md-7 mb-3">
+                                <label for="email">Email</label>
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                </div>
+                                <input type="text" class="form-control" id="email" name="email" placeholder=" Email " 
+                                aria-describedby="inputGroupPrepend" required>
+                                <div class="invalid-feedback">
+                                Email no valido.
+                                </div>
+                                </div>
+                                </div>
                             </div>
                             <div class="form-row">
                             <div class="col-md-5 mb-3">
                             <label for="role">Tipo de Cuenta</label>
-                            <select type="text" class="form-control" id="role" placeholder="-Seleccione el tipo-" required>
-                                <option value="" selected disabled>-Seleccione el tipo-</option>
-                                <option value="manager">Manager</option>
-                                <option value="volunt">Voluntario</option>
-                            </select>
-                            <div class="invalid-feedback">
-                            Seleccione el tipo de cuenta.
-                            </div>
-                            </div>
-                            <div class="col-md-7 mb-3">
-                            <label for="validationCustom06">State</label>
-                            <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-                            <div class="invalid-feedback">
-                            Please provide a valid state.
-                            </div>
-                            </div>
-                            <div class="col-md-7 mb-3">
-                            <label for="validationCustom07">Zip</label>
-                            <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                            <div class="invalid-feedback">
-                            Please provide a valid zip.
-                            </div>
-                            </div>
-                            </div>
-                            <div class="form-group">
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                            <label class="form-check-label" for="invalidCheck">
-                            Agree to <a href="#">terms and conditions</a>
-                            </label>
-                            <div class="invalid-feedback">
-                            You must agree before submitting.
+                                <select type="text" class="form-control" id="role" name="role" placeholder="-Seleccione el tipo-" required>
+                                    <option value="" selected disabled>-Seleccione el tipo-</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="volunt">Voluntario</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                Seleccione el tipo de cuenta.
+                                </div>
+                                </div>
+                                <div class="col-md-7 mb-3">
+                                <label for="comp">Compañia</label>
+                                <input type="text" class="form-control" id="comp" name="comp" placeholder="-">
                             </div>
                             </div>
                             </div>
