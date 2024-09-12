@@ -1,3 +1,6 @@
+<?php 
+    include("../navbar/dir_navbar.php");
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +9,13 @@
     <title>Document</title>
 </head>
 <body>
-
-    <h1>Menu principal :P</h1>
-    <div class="d-flex ">
+ <?php 
+    incluir_navbar();
+ ?>
+    <div class="d-flex column mb-3 btn btn-secondary">
+        <h1>hola</h1>
         <div>
-            <h2>felicidades
-                
-            </h2>
+            
         </div>
         <div>
 

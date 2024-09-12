@@ -1,3 +1,3 @@
 <?php
-header("locate: vista/MenuPrincipal.php")
+header("location: vista/MenuPrincipal.php")
 ?>
