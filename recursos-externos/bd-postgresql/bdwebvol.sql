@@ -5,7 +5,7 @@
 -- Dumped from database version 16.4
 -- Dumped by pg_dump version 16.4
 
--- Started on 2024-09-10 19:02:52
+-- Started on 2024-09-12 11:57:23
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -20,7 +20,7 @@ SET row_security = off;
 
 DROP DATABASE IF EXISTS bdwebvol;
 --
--- TOC entry 4811 (class 1262 OID 16396)
+-- TOC entry 4810 (class 1262 OID 16396)
 -- Name: bdwebvol; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -115,7 +115,7 @@ CREATE TABLE public.usuarios (
 ALTER TABLE public.usuarios OWNER TO postgres;
 
 --
--- TOC entry 4802 (class 0 OID 16410)
+-- TOC entry 4801 (class 0 OID 16410)
 -- Dependencies: 215
 -- Data for Name: actividades; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -123,7 +123,7 @@ ALTER TABLE public.usuarios OWNER TO postgres;
 
 
 --
--- TOC entry 4804 (class 0 OID 16423)
+-- TOC entry 4803 (class 0 OID 16423)
 -- Dependencies: 217
 -- Data for Name: registros; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -131,15 +131,16 @@ ALTER TABLE public.usuarios OWNER TO postgres;
 
 
 --
--- TOC entry 4805 (class 0 OID 16443)
+-- TOC entry 4804 (class 0 OID 16443)
 -- Dependencies: 218
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public.usuarios OVERRIDING SYSTEM VALUE VALUES ('JuanGL', 'conTRAS#1', 'Juan', 'Garcia', 'juan@mail.com', 'manager', '-', NULL, NULL);
 
 
 --
--- TOC entry 4812 (class 0 OID 0)
+-- TOC entry 4811 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: registrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -148,7 +149,7 @@ SELECT pg_catalog.setval('public.registrations_id_seq', 1, false);
 
 
 --
--- TOC entry 4645 (class 2606 OID 16416)
+-- TOC entry 4644 (class 2606 OID 16416)
 -- Name: actividades activities_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -157,7 +158,7 @@ ALTER TABLE ONLY public.actividades
 
 
 --
--- TOC entry 4647 (class 2606 OID 16430)
+-- TOC entry 4646 (class 2606 OID 16430)
 -- Name: registros registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -166,7 +167,7 @@ ALTER TABLE ONLY public.registros
 
 
 --
--- TOC entry 4649 (class 2606 OID 16475)
+-- TOC entry 4648 (class 2606 OID 16475)
 -- Name: registros registrations_user_id_activity_code_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -175,16 +176,7 @@ ALTER TABLE ONLY public.registros
 
 
 --
--- TOC entry 4643 (class 2606 OID 16494)
--- Name: usuarios users_role_check; Type: CHECK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.usuarios
-    ADD CONSTRAINT users_role_check CHECK ((rol = ANY (ARRAY['manager'::text, 'voluntario'::text, 'administrador'::text]))) NOT VALID;
-
-
---
--- TOC entry 4651 (class 2606 OID 16454)
+-- TOC entry 4650 (class 2606 OID 16454)
 -- Name: usuarios users_temp_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -193,7 +185,7 @@ ALTER TABLE ONLY public.usuarios
 
 
 --
--- TOC entry 4653 (class 2606 OID 16452)
+-- TOC entry 4652 (class 2606 OID 16452)
 -- Name: usuarios users_temp_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -202,7 +194,7 @@ ALTER TABLE ONLY public.usuarios
 
 
 --
--- TOC entry 4655 (class 2606 OID 16467)
+-- TOC entry 4654 (class 2606 OID 16467)
 -- Name: usuarios usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -211,7 +203,7 @@ ALTER TABLE ONLY public.usuarios
 
 
 --
--- TOC entry 4656 (class 2606 OID 16483)
+-- TOC entry 4655 (class 2606 OID 16483)
 -- Name: actividades activities_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -220,7 +212,7 @@ ALTER TABLE ONLY public.actividades
 
 
 --
--- TOC entry 4657 (class 2606 OID 16438)
+-- TOC entry 4656 (class 2606 OID 16438)
 -- Name: registros registrations_activity_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -229,7 +221,7 @@ ALTER TABLE ONLY public.registros
 
 
 --
--- TOC entry 4658 (class 2606 OID 16488)
+-- TOC entry 4657 (class 2606 OID 16488)
 -- Name: registros registrations_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -237,7 +229,7 @@ ALTER TABLE ONLY public.registros
     ADD CONSTRAINT registrations_user_id_fkey FOREIGN KEY (usuario_id) REFERENCES public.usuarios(username);
 
 
--- Completed on 2024-09-10 19:02:52
+-- Completed on 2024-09-12 11:57:25
 
 --
 -- PostgreSQL database dump complete
