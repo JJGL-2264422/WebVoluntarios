@@ -5,8 +5,47 @@
         <link rel="stylesheet" href="../../css/bootstrap.min.css">
     </head>
     <body>
+        
+        <?php
+            include("../../controlador/conectarBD.php");
+            $mensaje = '';
+
+            $username = (isset($_POST['username']))?$_POST['username']:"";
+            $password = (isset($_POST['password']))?$_POST['password']:"";
+            $nom = (isset($_POST['usrnom']))?$_POST['usrnom']:"";
+            $ape = (isset($_POST['usrapd']))?$_POST['usrapd']:"";
+            $email = (isset($_POST['email']))?$_POST['email']:"";
+            $rol = (isset($_POST['username']))?$_POST['role']:"";
+
+            if(empty($_POST['comp'])){
+                $comp = "-";
+            }else{
+                $comp = $_POST['comp'];
+            }
+
+            $submit = (isset($_POST['submit']))?$_POST['submit']:"";
+
+            if($submit == 'Registro'){
+                $submit = "";
+                $sql = "insert into public.usuarios(username,password,nombre,apellido,email,compañia,rol)values(:username,:password,:nom,:ape,:email,:rol,:comp)";
+                $statement = $conn->prepare($sql);
+                if($statement->execute([':username' => $username, ':password' => $password, ':nom' => $nom, ':ape' => $ape, ':email' => $email, ':rol' => $rol, ':comp' => $comp])){
+                    $mensaje = "Registro con éxito!";
+                }
+                else{
+                    $mensaje = "Error";
+                }
+            }   
+        ?>
+
         <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-center">
+
+                <?php
+                    if(!empty($mensaje)): ?>
+                    <div class="alert"> <?= $mensaje; ?> </div>
+                <?php endif; ?>
+
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-header">
@@ -55,7 +94,7 @@
                                         <select type="text" class="form-control" id="role" name="role" placeholder="-Seleccione el tipo-" required>
                                             <option value="" selected disabled>-Seleccione el tipo-</option>
                                             <option value="manager">Manager</option>
-                                            <option value="volunt">Voluntario</option>
+                                            <option value="voluntario">Voluntario</option>
                                         </select>
                                         <div class="invalid-feedback">
                                         Seleccione el tipo de cuenta.
@@ -67,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">Registrarse</button>
+                            <button class="btn btn-primary" type="submit" name="submit" value="Registro">Registrarse</button>
                             <p style="display:inline-block; text-align: right; margin-left:15px;">
                                 <a href="../MenuPrincipal.php">Volver</a>
                             </p>
