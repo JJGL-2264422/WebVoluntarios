@@ -35,6 +35,26 @@ CREATE TABLE IF NOT EXISTS `actividades` (
 
 -- Volcando datos para la tabla bdwebvol.actividades: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla bdwebvol.perfiles
+CREATE TABLE IF NOT EXISTS `perfiles` (
+  `perfil_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_perfil` varchar(50) NOT NULL,
+  `p_avatar` varchar(50) NOT NULL DEFAULT '../imagen/avatars/default.png',
+  `p_nombre` varchar(100) NOT NULL,
+  `p_apellido` varchar(100) NOT NULL,
+  `p_apodo` varchar(50) NOT NULL,
+  `p_telefono` bigint(10) NOT NULL DEFAULT 0,
+  `p_compañia` varchar(50) NOT NULL,
+  `p_edad` int(3) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`perfil_id`),
+  KEY `fk_user_id` (`user_perfil`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_perfil`) REFERENCES `usuarios` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla bdwebvol.perfiles: ~1 rows (aproximadamente)
+INSERT INTO `perfiles` (`perfil_id`, `user_perfil`, `p_avatar`, `p_nombre`, `p_apellido`, `p_apodo`, `p_telefono`, `p_compañia`, `p_edad`) VALUES
+	(1, 'Voluntario123', '../imagen/avatars/default.png', 'Mario', 'Carvajal', 'Maar', 320999999, 'VolunYa', 31);
+
 -- Volcando estructura para tabla bdwebvol.registros
 CREATE TABLE IF NOT EXISTS `registros` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -50,15 +70,16 @@ CREATE TABLE IF NOT EXISTS `registros` (
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `username` varchar(50) NOT NULL DEFAULT '',
   `password` varchar(30) NOT NULL DEFAULT '',
-  `nombre` varchar(70) NOT NULL DEFAULT '',
-  `apellido` varchar(70) NOT NULL DEFAULT '',
   `email` varchar(70) NOT NULL DEFAULT '',
-  `compañia` varchar(50) NOT NULL DEFAULT ' ',
   `rol` varchar(25) NOT NULL DEFAULT '',
+  `valoracion` float NOT NULL DEFAULT 0,
+  `num_valor` int(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bdwebvol.usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bdwebvol.usuarios: ~1 rows (aproximadamente)
+INSERT INTO `usuarios` (`username`, `password`, `email`, `rol`, `valoracion`, `num_valor`) VALUES
+	('Voluntario123', 'CONtras3ña', 'a@mail.com', 'voluntario', 3.5, 2);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
