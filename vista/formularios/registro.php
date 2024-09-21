@@ -26,7 +26,7 @@
                 $sql = "insert into usuarios (username,password,email,rol) values (:username,:password,:email,:rol)";
                 $statement = $conn->prepare($sql);
                 if($statement->execute([':username' => $username, ':password' => $password,':email' => $email, ':rol' => $rol])){
-                    $sql = "insert into perfiles (user_perfil,nombre,apellido,compañia) values (:userid,:nom,:ape,:comp)";
+                    $sql = "insert into perfiles (user_perfil,p_nombre,p_apellido,p_compañia) values (:userid,:nom,:ape,:comp)";
                     $statement = $conn->prepare($sql);
                     $statement->execute([':userid' => $username, ':nom' => $nom, ':ape' => $ape,':comp' => $comp]);
                     $mensaje = "Registro con éxito!";
