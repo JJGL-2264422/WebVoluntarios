@@ -24,14 +24,13 @@
         include("../../controlador/conectarBD.php");
         $mensaje = '';
 
-        $username = isset($_POST['username']) ? $_POST['username'] : "";
+        $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
+        $email = 'a@mail.com';
         $password = isset($_POST['password']) ? $_POST['password'] : "";
         $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : "";
-
         $submit = isset($_POST['submit']) ? $_POST['submit'] : "";
 
         function validarContraseña($password) {
-            // Comprobar los requisitos de la contraseña
             if (strlen($password) < 8) {
                 return "La contraseña debe tener al menos 8 caracteres.";
             }
@@ -44,45 +43,41 @@
             if (!preg_match('/[\W_]/', $password)) { 
                 return "La contraseña debe contener al menos un símbolo.";
             }
-            return true; // Si pasa todas las validaciones
+            return true;
         }
 
         if ($submit == 'Actualizar') {
-            if (empty($username) && empty($password)) {
-                $mensaje = "No se han realizado cambios.";
-            } else {
-                $updates = [];
-                $params = [];
+            $updates = [];
+            $params = [];
 
-                if (!empty($username)) {
-                    $updates[] = "username = :username";
-                    $params[':username'] = $username;
-                }
+            if (!empty($usuario)) {
+                $updates[] = "username = :usuario";
+                $params[':usuario'] = $usuario;
+            }
 
-                if (!empty($password)) {
-                    if ($password !== $confirm_password) {
-                        $mensaje = "Las contraseñas no coinciden.";
+            if (!empty($password)) {
+                if ($password !== $confirm_password) {
+                    $mensaje = "Las contraseñas no coinciden.";
+                } else {
+                    $validacion = validarContraseña($password);
+                    if ($validacion !== true) {
+                        $mensaje = $validacion;
                     } else {
-                        $validacion = validarContraseña($password);
-                        if ($validacion !== true) {
-                            $mensaje = $validacion; // Si hay un error, asigna el mensaje
-                        } else {
-                            $updates[] = "password = :password";
-                            $params[':password'] = password_hash($password, PASSWORD_BCRYPT); // Hashear la contraseña
-                        }
+                        $updates[] = "password = :password";
+                        $params[':password'] = $password;
                     }
                 }
+            }
 
-                if (!empty($updates)) {
-                    $sql = "UPDATE usuarios SET " . implode(", ", $updates) . " WHERE username = :current_username";
-                    $params[':current_username'] = $_POST['current_username'];
+            if (!empty($updates)) {
+                $sql = "UPDATE usuarios SET " . implode(', ', $updates) . " WHERE email = :email";
+                $params[':email'] = $email;
+                $statement = $conn->prepare($sql);
 
-                    $statement = $conn->prepare($sql);
-                    if ($statement->execute($params)) {
-                        $mensaje = "Cambio de seguridad con éxito!";
-                    } else {
-                        $mensaje = "Error al actualizar.";
-                    }
+                if ($statement->execute($params)) {
+                    $mensaje = "Cambio de seguridad con éxito!";
+                } else {
+                    $mensaje = "Error al actualizar: ";
                 }
             }
         }
@@ -108,28 +103,23 @@
                         </small>
                         <div style="margin-top: 15px;"></div>
                         <form method="post">
-                            <input type="hidden" name="current_username" value="<?php echo htmlspecialchars($username); ?>">
                             <div class="form-row">
                                 <div class="col-md-auto mb-3">
-                                    <label for="username">Nuevo Usuario</label>
-                                    <input type="text" class="form-control" id="username" name="username">
+                                    <label for="usuario">Nuevo Usuario</label>
+                                    <input type="text" class="form-control" id="usuario" name="usuario">
                                 </div>
                                 <div class="col-md-auto mb-3">
                                     <label for="password">Contraseña</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="password" name="password">
-                                        <span class="toggle-password" onclick="togglePassword('password')">
-                                            👁️
-                                        </span>
+                                        <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
                                     </div>
                                 </div>
                                 <div class="col-md-auto mb-3">
                                     <label for="confirm_password">Confirmar Contraseña</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                                        <span class="toggle-password" onclick="togglePassword('confirm_password')">
-                                            👁️
-                                        </span>
+                                        <span class="toggle-password" onclick="togglePassword('confirm_password')">👁️</span>
                                     </div>
                                 </div>
                             </div>
@@ -148,11 +138,7 @@
     <script>
         function togglePassword(id) {
             var input = document.getElementById(id);
-            if (input.type === "password") {
-                input.type = "text";
-            } else {
-                input.type = "password";
-            }
+            input.type = input.type === "password" ? "text" : "password";
         }
     </script>
 </body>
