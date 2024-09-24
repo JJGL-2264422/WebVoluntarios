@@ -41,7 +41,7 @@
         <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-center">
 
-                <?php
+                 <?php
                     if(!empty($mensaje)): ?>
                     <div class="alert"> <?= $mensaje; ?> </div>
                 <?php endif; ?>
