@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `inicia_en` datetime NOT NULL,
   `termina_en` datetime NOT NULL,
   `ubicacion` varchar(50) NOT NULL DEFAULT '',
+  `ac_activo` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`act_codigo`),
   KEY `FK_creador_usuario` (`creador_id`),
   CONSTRAINT `FK_creador_usuario` FOREIGN KEY (`creador_id`) REFERENCES `usuarios` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -46,14 +47,15 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   `p_telefono` bigint(10) NOT NULL DEFAULT 0,
   `p_compañia` varchar(50) NOT NULL,
   `p_edad` int(3) NOT NULL DEFAULT 0,
+  `p_activo` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`perfil_id`),
   KEY `fk_user_id` (`user_perfil`),
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_perfil`) REFERENCES `usuarios` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bdwebvol.perfiles: ~1 rows (aproximadamente)
-INSERT INTO `perfiles` (`perfil_id`, `user_perfil`, `p_avatar`, `p_nombre`, `p_apellido`, `p_apodo`, `p_telefono`, `p_compañia`, `p_edad`) VALUES
-	(1, 'Voluntario123', '../imagen/avatars/default.png', 'Mario', 'Carvajal', 'Maar', 320999999, 'VolunYa', 31);
+-- Volcando datos para la tabla bdwebvol.perfiles: ~2 rows (aproximadamente)
+INSERT INTO `perfiles` (`perfil_id`, `user_perfil`, `p_avatar`, `p_nombre`, `p_apellido`, `p_apodo`, `p_telefono`, `p_compañia`, `p_edad`, `p_activo`) VALUES
+	(1, 'Voluntario123', '../imagen/avatars/default.png', 'Mario', 'Hernandez', 'Mar', 3183048561, 'VoluntaYa', 34, 1);
 
 -- Volcando estructura para tabla bdwebvol.registros
 CREATE TABLE IF NOT EXISTS `registros` (
@@ -61,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `registros` (
   `usuario_id` varchar(50) NOT NULL DEFAULT '',
   `codigo_actividad` varchar(50) NOT NULL DEFAULT '',
   `fecha_registro` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
+  `reg_activo` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -74,12 +77,13 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `rol` varchar(25) NOT NULL DEFAULT '',
   `valoracion` float NOT NULL DEFAULT 0,
   `num_valor` int(10) NOT NULL DEFAULT 0,
+  `us_activo` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bdwebvol.usuarios: ~1 rows (aproximadamente)
-INSERT INTO `usuarios` (`username`, `password`, `email`, `rol`, `valoracion`, `num_valor`) VALUES
-	('Voluntario123', 'CONtras3ña', 'a@mail.com', 'voluntario', 3.5, 2);
+-- Volcando datos para la tabla bdwebvol.usuarios: ~2 rows (aproximadamente)
+INSERT INTO `usuarios` (`username`, `password`, `email`, `rol`, `valoracion`, `num_valor`, `us_activo`) VALUES
+	('Voluntario123', 'conTRAs3ña', 'marher@mail.com', 'voluntario', 3.5, 2, 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
