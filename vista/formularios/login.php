@@ -14,7 +14,7 @@
                             <h4>Iniciar Sesión</h4>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="">
                             <div class = "form-group">
                                 <label for="username">Nombre de Usuario</label>
                                 <input type="username" class="form-control" id="username" name="username"> <br>
@@ -28,7 +28,7 @@
                                 <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
                                 <p></p>
                             </div>
-                                <button type="submit" class="btn btn-primary">Entrar</button>
+                                <button type="submit" class="btn btn-primary" name="enter">Entrar</button>
                             </form>
                             No tienes una cuenta? <a class="btn btn-primary" href="./registro.php" role="button">Registrarse</a>
                         </div>
@@ -37,7 +37,13 @@
                 </div>
             </div>
         </div>
-    </body>+
+
+    <?php 
+        
+    
+    ?>
+
+    </body>
 
 </html>
 

@@ -16,19 +16,21 @@
             $ape = (isset($_POST['usrapd']))?$_POST['usrapd']:"";
             $email = (isset($_POST['email']))?$_POST['email']:"";
             $rol = (isset($_POST['username']))?$_POST['role']:"";
-            $comp = (isset($_POST['comp']))?$_POST['comp']:"";
 
+            if(empty($_POST['comp'])){
+                $comp = "-";
+            }else{
+                $comp = $_POST['comp'];
+            }
 
             $submit = (isset($_POST['submit']))?$_POST['submit']:"";
-            //
+
             if($submit == 'Registro'){
-                $sql = "insert into usuarios (username,password,email,rol) values (:username,:password,:email,:rol)";
+                $submit = "";
+                $sql = "insert into public.usuarios(username,password,nombre,apellido,email,compañia,rol)values(:username,:password,:nom,:ape,:email,:rol,:comp)";
                 $statement = $conn->prepare($sql);
-                if($statement->execute([':username' => $username, ':password' => $password,':email' => $email, ':rol' => $rol])){
-                    $sql = "insert into perfiles (user_perfil,p_nombre,p_apellido,p_compañia) values (:userid,:nom,:ape,:comp)";
-                    $statement = $conn->prepare($sql);
-                    $statement->execute([':userid' => $username, ':nom' => $nom, ':ape' => $ape,':comp' => $comp]);
-                    header("Location: ./login.php?msj=1");
+                if($statement->execute([':username' => $username, ':password' => $password, ':nom' => $nom, ':ape' => $ape, ':email' => $email, ':rol' => $rol, ':comp' => $comp])){
+                    $mensaje = "Registro con éxito!";
                 }
                 else{
                     $mensaje = "Error";
@@ -39,9 +41,10 @@
         <div class="container" style="margin-top: 20px;">
             <div class="row justify-content-center">
 
-                <?php
-                    if(!empty($mensaje)){ echo '<div class="alert alert-danger">' . $mensaje . '</div>'; }
-                ?>
+                 <?php
+                    if(!empty($mensaje)): ?>
+                    <div class="alert"> <?= $mensaje; ?> </div>
+                <?php endif; ?>
 
                 <div class="col-md-5">
                     <div class="card">
@@ -99,7 +102,7 @@
                                     </div>
                                     <div class="col-md-auto mb-4">
                                         <label for="comp">Compañia</label>
-                                        <input type="text" class="form-control" id="comp" name="comp">
+                                        <input type="text" class="form-control" id="comp" name="comp" placeholder="-">
                                     </div>
                                 </div>
                             </div>
