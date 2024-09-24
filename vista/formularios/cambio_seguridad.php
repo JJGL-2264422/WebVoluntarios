@@ -75,7 +75,7 @@
                 $statement = $conn->prepare($sql);
 
                 if ($statement->execute($params)) {
-                    $mensaje = "Cambio de seguridad con éxito!";
+                    header("Location: ../perfil.php?msj=1");
                 } else {
                     $mensaje = "Error al actualizar: ";
                 }
@@ -125,7 +125,7 @@
                             </div>
                             <button class="btn btn-primary" type="submit" name="submit" value="Actualizar">Actualizar</button>
                             <p style="display:inline-block; text-align: right; margin-left:15px;">
-                                <a href="../MenuPrincipal.php">Volver</a>
+                                <a href="../perfil.php">Volver</a>
                             </p>
                         </form>
                     </div>
