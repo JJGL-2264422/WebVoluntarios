@@ -1,11 +1,11 @@
 <?php
     $host = "localhost";
     $dbname = "bdwebvol";
-    $user = "postgres";
-    $pass = "postgres";
+    $user = "root";
+    $pass = "";
             
     try{
-        $conn = new PDO ("pgsql:host=$host;dbname=$dbname", $user, $pass);
+        $conn = new PDO ("mysql:host=$host;dbname=$dbname", $user, $pass);
     }
     catch(PDOException $exp){
         echo ("Error al conectarse a la base de datos: $exp");

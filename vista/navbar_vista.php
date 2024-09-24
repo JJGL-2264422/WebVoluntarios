@@ -17,22 +17,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="###">¿Quienes Somos?</a>
-        </li>
+       
 
         <li class="nav-item">
           <a class="nav-link" href="formularios/registro.php">Registrar</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Iniciar Sesion
-          </a>
-          <ul class="dropdown-menu justify-content-top "!important>
-            <li><a class="dropdown-item" href="login_admin2.php">Administrador</a></li>
-            <li><a class="dropdown-item" href="login_vendedor2.php">Vendedor</a></li>
-            <li><a class="dropdown-item" href="login_user2.php">Usuarios</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="formularios/login.php">Iniciar Sesión</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
