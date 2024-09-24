@@ -22,14 +22,13 @@
             $submit = (isset($_POST['submit']))?$_POST['submit']:"";
             //
             if($submit == 'Registro'){
-                $submit = "";
                 $sql = "insert into usuarios (username,password,email,rol) values (:username,:password,:email,:rol)";
                 $statement = $conn->prepare($sql);
                 if($statement->execute([':username' => $username, ':password' => $password,':email' => $email, ':rol' => $rol])){
                     $sql = "insert into perfiles (user_perfil,p_nombre,p_apellido,p_compañia) values (:userid,:nom,:ape,:comp)";
                     $statement = $conn->prepare($sql);
                     $statement->execute([':userid' => $username, ':nom' => $nom, ':ape' => $ape,':comp' => $comp]);
-                    $mensaje = "Registro con éxito!";
+                    header("Location: ./login.php?msj=1");
                 }
                 else{
                     $mensaje = "Error";
