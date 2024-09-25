@@ -77,7 +77,7 @@ if ($statement->execute()) {
     <div class="container-fluid">
       <div class="nav navbar-nav">
         <a class="navbar-brand" href="MenuPrincipal.php">Voluntarios S.A</a>
-        <a class="nav-item nav-link active" href="#">Perfil <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="#">Perfil</a>
         <a class="nav-item nav-link" href="./menu_actividades.php">Actividades</a>
       </div>
       <div class="nav navbar-nav">

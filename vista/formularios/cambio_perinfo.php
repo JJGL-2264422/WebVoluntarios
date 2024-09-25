@@ -63,13 +63,16 @@ if ($submit == 'Guardar') {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
+    <nav class="navbar navbar-expand navbar-light bg-body-tertiary">
+        <div class="container-fluid">
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Actividades</a>
+            <a class="navbar-brand" href="MenuPrincipal.php">Voluntarios S.A</a>
+            <a class="nav-item nav-link" href="../perfil.php">Perfil</a>
+            <a class="nav-item nav-link" href="./menu_actividades.php">Actividades</a>
         </div>
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link" href="#">Cerrar sesión</a>
+            <a class="nav-item nav-link" href="../../controlador/cerrar_sesion.php">Cerrar sesión</a>
+        </div>
         </div>
     </nav>
 

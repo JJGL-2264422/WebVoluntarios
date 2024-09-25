@@ -25,7 +25,7 @@ $listaActs = $statement->fetchAll(PDO::FETCH_ASSOC);
             <a class="nav-item nav-link active" href="#">Actividades <span class="sr-only">(current)</span></a>
             </div>
             <div class="nav navbar-nav">
-            <a class="nav-item nav-link" href="#">Cerrar sesión</a>
+            <a class="nav-item nav-link" href="../controlador/cerrar_sesion.php">Cerrar sesión</a>
             </div>
         </div>
     </nav>
