@@ -1,7 +1,7 @@
 <?php
 include("../controlador/conectarBD.php");
 
-$SELsql = "SELECT * FROM actividades";
+$SELsql = "SELECT * FROM actividades WHERE ac_activo = 1";
 $statement = $conn->prepare($SELsql);
 $statement->execute();
 $listaActs = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -17,13 +17,16 @@ $listaActs = $statement->fetchAll(PDO::FETCH_ASSOC);
     <title>Actividades</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand navbar-light bg-light justify-content-between">
-        <div class="nav navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Actividades</a>
-        </div>
-        <div class="nav navbar-nav">
-          <a class="nav-item nav-link" href="#">Cerrar sesión</a>
+    <nav class="navbar navbar-expand navbar-light bg-body-tertiary">     
+        <div class="container-fluid">
+            <div class="nav navbar-nav">
+            <a class="navbar-brand" href="MenuPrincipal.php">Voluntarios S.A</a>
+            <a class="nav-item nav-link" href="./perfil.php">Perfil</a>
+            <a class="nav-item nav-link active" href="#">Actividades <span class="sr-only">(current)</span></a>
+            </div>
+            <div class="nav navbar-nav">
+            <a class="nav-item nav-link" href="#">Cerrar sesión</a>
+            </div>
         </div>
     </nav>
 
@@ -36,13 +39,13 @@ $listaActs = $statement->fetchAll(PDO::FETCH_ASSOC);
                     </div><hr>
                 </div>
             </div>
-            <div class="col-lg-9 container" style="width:1217px;margin:20px; margin-left:45px;">
+            <div class="col-lg-9 container" style="margin:2%; margin-left:2%;">
                 <!-- Crear uno por actividad -->
                 <div style="display:flex; justify-content:start; flex-wrap:wrap;">
                 <?php
                     foreach($listaActs as $actvs){
                         echo ('
-                            <div style="margin-right:10px;margin-bottom:20px;">
+                            <div style="margin-right:5px;margin-bottom:5px;">
                                 <div class="card" style="width: 18rem;">
                                     <div style="height:125px;width:auto;overflow:hidden;margin-left:15px;margin-right:15px;margin-top:15px;">
                                     <img src="' . $actvs['act_img'] . '" style="display:block; margin-left:auto; margin-right:auto; width:100%;">
@@ -50,11 +53,12 @@ $listaActs = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="card-body">
                                         <h5 class="card-title">' . $actvs['nombre'] . '</h5>
                                         <p class="card-text">' . $actvs['descripcion'] . '</p>
-                                        <a href="hamburguesa.php?actcod=' . $actvs['act_codigo'] . '" class="btn btn-primary">Ver</a>
+                                        <a href="./actividad_detalles.php?actcod=' . $actvs['act_codigo'] . '" class="btn btn-primary">Ver detalles</a>
                                     </div>
                                 </div>
                             </div>
                         ');}
+                        //<a href="hamburguesa.php?actcod=' . $actvs['act_codigo'] . '" class="btn btn-primary">Ver</a>
                     ?>
                 </div>
             </div>
@@ -63,7 +67,7 @@ $listaActs = $statement->fetchAll(PDO::FETCH_ASSOC);
 </body>
 <footer class="bg-secondary">
     <div style="margin-top: 15px;">
-        Oigan y si me mato
+        PLACEHOLDER PLACEHOLDER PLACEHOLDER
     </div>
 </footer>
 </html>
