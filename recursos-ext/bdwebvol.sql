@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `act_codigo` varchar(50) NOT NULL DEFAULT '',
   `nombre` varchar(100) NOT NULL DEFAULT '',
   `descripcion` varchar(50) NOT NULL DEFAULT '',
+  `act_img` varchar(100) NOT NULL DEFAULT '../imagen/act_imgs/default.png',
   `creador_id` varchar(50) NOT NULL DEFAULT '',
   `inicia_en` datetime NOT NULL,
   `termina_en` datetime NOT NULL,
@@ -34,7 +35,12 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   CONSTRAINT `FK_creador_usuario` FOREIGN KEY (`creador_id`) REFERENCES `usuarios` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla bdwebvol.actividades: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bdwebvol.actividades: ~4 rows (aproximadamente)
+INSERT INTO `actividades` (`act_codigo`, `nombre`, `descripcion`, `act_img`, `creador_id`, `inicia_en`, `termina_en`, `ubicacion`, `ac_activo`) VALUES
+	('202452362', 'Plantacion 3', 'Plantar arboles en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-26 10:00:00', '2024-09-26 17:00:00', 'Parque Akino', 1),
+	('202493224', 'Plantacion', 'Plantar flores en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-25 10:00:00', '2024-09-25 17:00:00', 'Parque Akino', 1),
+	('202493253', 'Plantacion 2', 'Plantar arboles en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-26 10:00:00', '2024-09-26 17:00:00', 'Parque Akino', 1),
+	('202495624', 'Excavacion', 'Plantar flores en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-25 10:00:00', '2024-09-25 17:00:00', 'Parque Akino', 1);
 
 -- Volcando estructura para tabla bdwebvol.perfiles
 CREATE TABLE IF NOT EXISTS `perfiles` (
