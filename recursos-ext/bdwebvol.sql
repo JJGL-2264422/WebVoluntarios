@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `inicia_en` datetime NOT NULL,
   `termina_en` datetime NOT NULL,
   `ubicacion` varchar(50) NOT NULL DEFAULT '',
+  `act_etiquetas` varchar(100) NOT NULL,
   `ac_activo` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`act_codigo`),
   KEY `FK_creador_usuario` (`creador_id`),
@@ -36,11 +37,11 @@ CREATE TABLE IF NOT EXISTS `actividades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla bdwebvol.actividades: ~4 rows (aproximadamente)
-INSERT INTO `actividades` (`act_codigo`, `nombre`, `descripcion`, `act_img`, `creador_id`, `inicia_en`, `termina_en`, `ubicacion`, `ac_activo`) VALUES
-	('202452362', 'Plantacion 3', 'Plantar arboles en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-26 10:00:00', '2024-09-26 17:00:00', 'Parque Akino', 1),
-	('202493224', 'Plantacion', 'Plantar flores en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-25 10:00:00', '2024-09-25 17:00:00', 'Parque Akino', 1),
-	('202493253', 'Plantacion 2', 'Plantar arboles en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-26 10:00:00', '2024-09-26 17:00:00', 'Parque Akino', 1),
-	('202495624', 'Excavacion', 'Plantar flores en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-25 10:00:00', '2024-09-25 17:00:00', 'Parque Akino', 1);
+INSERT INTO `actividades` (`act_codigo`, `nombre`, `descripcion`, `act_img`, `creador_id`, `inicia_en`, `termina_en`, `ubicacion`, `act_etiquetas`, `ac_activo`) VALUES
+	('202452362', 'Plantacion 3', 'Plantar arboles en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-26 10:00:00', '2024-09-26 17:00:00', 'Parque Akino', '', 1),
+	('202493224', 'Plantacion', 'Plantar flores en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-25 10:00:00', '2024-09-25 17:00:00', 'Parque Akino', '', 1),
+	('202493253', 'Plantacion 2', 'Plantar arboles en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-26 10:00:00', '2024-09-26 17:00:00', 'Parque Akino', '', 1),
+	('202495624', 'Excavacion', 'Plantar flores en el parque', '../imagen/act_imgs/default.png', 'Voluntario123', '2024-09-25 10:00:00', '2024-09-25 17:00:00', 'Parque Akino', '', 1);
 
 -- Volcando estructura para tabla bdwebvol.perfiles
 CREATE TABLE IF NOT EXISTS `perfiles` (
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   `p_telefono` bigint(10) NOT NULL DEFAULT 0,
   `p_compañia` varchar(50) NOT NULL,
   `p_edad` int(3) NOT NULL DEFAULT 0,
+  `etiquetas` varchar(100) NOT NULL DEFAULT '',
   `p_activo` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`perfil_id`),
   KEY `fk_user_id` (`user_perfil`),
@@ -60,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla bdwebvol.perfiles: ~2 rows (aproximadamente)
-INSERT INTO `perfiles` (`perfil_id`, `user_perfil`, `p_avatar`, `p_nombre`, `p_apellido`, `p_apodo`, `p_telefono`, `p_compañia`, `p_edad`, `p_activo`) VALUES
-	(1, 'Voluntario123', '../imagen/avatars/default.png', 'Mario', 'Hernandez', 'Mar', 3183048561, 'VoluntaYa', 34, 1);
+INSERT INTO `perfiles` (`perfil_id`, `user_perfil`, `p_avatar`, `p_nombre`, `p_apellido`, `p_apodo`, `p_telefono`, `p_compañia`, `p_edad`, `etiquetas`, `p_activo`) VALUES
+	(1, 'Voluntario123', '../imagen/avatars/default.png', 'Mario', 'Hernandez', 'Mar', 3183048561, 'VoluntaYa', 34, 'Animales domésticos, Manualidades, Deportes', 1);
 
 -- Volcando estructura para tabla bdwebvol.registros
 CREATE TABLE IF NOT EXISTS `registros` (
