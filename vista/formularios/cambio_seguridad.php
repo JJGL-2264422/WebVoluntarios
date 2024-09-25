@@ -1,31 +1,12 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Cambio de Seguridad</title>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <style>
-        .input-group {
-            position: relative;
-            margin-bottom: 15px; 
-        }
-        .input-group .toggle-password {
-            position: absolute;
-            right: -35px; 
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: gray; 
-        }
-    </style>
-</head>
-<body>
-
-    <?php
+<?php
         include("../../controlador/conectarBD.php");
+        include("../../controlador/sesion.php");
         $mensaje = '';
+        $userUPD = 0;
+
 
         $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
-        $email = 'a@mail.com';
+        $email = $conn->query("SELECT * FROM usuarios WHERE username = '$sesionid'")->fetch()[2];
         $password = isset($_POST['password']) ? $_POST['password'] : "";
         $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : "";
         $submit = isset($_POST['submit']) ? $_POST['submit'] : "";
@@ -53,6 +34,8 @@
             if (!empty($usuario)) {
                 $updates[] = "username = :usuario";
                 $params[':usuario'] = $usuario;
+                $userUPD = 1;
+                
             }
 
             if (!empty($password)) {
@@ -75,6 +58,7 @@
                 $statement = $conn->prepare($sql);
 
                 if ($statement->execute($params)) {
+                    if($userUPD == 1) $_SESSION['usuario_activo'] = $usuario;
                     header("Location: ../perfil.php?msj=1");
                 } else {
                     $mensaje = "Error al actualizar: ";
@@ -82,7 +66,27 @@
             }
         }
     ?>
-
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Cambio de Seguridad</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <style>
+        .input-group {
+            position: relative;
+            margin-bottom: 15px; 
+        }
+        .input-group .toggle-password {
+            position: absolute;
+            right: -35px; 
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: gray; 
+        }
+    </style>
+</head>
+<body>
     <div class="container" style="margin-top: 20px;">
         <div class="row justify-content-center">
 
