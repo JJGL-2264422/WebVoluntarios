@@ -9,6 +9,9 @@ if (isset($_GET['msj']) && $_GET['msj'] == 1) {
     $mensaje = "Su sesión ha caducado, inicie sesión nuevamente.";
 }
 
+if (isset($_GET['msj']) && $_GET['msj'] == 2) {
+    $mensaje = "¡Registrado correctamente!";
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "SELECT * FROM usuarios WHERE username='$user' AND password = '$contraseña'";

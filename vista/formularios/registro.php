@@ -30,7 +30,7 @@
                     $statement = $conn->prepare($sql);
                     $statement->execute([':userid' => $username, ':nom' => $nom, ':ape' => $ape,':comp' => $comp]);
                     $mensaje = "Registro con éxito!";
-                    header("Location: ./login.php?msj=1");
+                    header("Location: ./login.php?msj=2");
                 }
                 else{
                     $mensaje = "Error";
