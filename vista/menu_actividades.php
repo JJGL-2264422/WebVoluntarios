@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fechaCierre = $_POST['fechaCierre'];
     $ubicacion = $_POST['ubicacion'];
     
-    $insertSql = "INSERT INTO actividades (nombre, descripcion, act_img, creador_id, act_rol, inicia_en, termina_en, ubicacion, ac_activo) 
-                  VALUES (:nombre, :descripcion, '../imagen/act_imgs/default.png', :creador_id, :act_rol, :inicia_en, :termina_en, :ubicacion, 1)";
+    $insertSql = "INSERT INTO actividades (nombre, descripcion, creador_id, act_rol, inicia_en, termina_en, ubicacion) 
+                  VALUES (:nombre, :descripcion, :creador_id, :act_rol, :inicia_en, :termina_en, :ubicacion)";
     
     $insertStatement = $conn->prepare($insertSql);
     $insertStatement->execute([
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="content-wrapper container-fluid p-0">
         <div class="row no-gutters" style="min-height: 100vh;">
-            <div class="col-2 sidebar d-flex flex-column bg-secondary" style="max-width: 300px;">
+            <div class="order-1 col-2 sidebar d-flex flex-column bg-secondary" style="max-width: 300px;">
                 <div class="card" style="min-height: calc(100% - 20px); margin-left:10px; margin-top:10px; margin-bottom:10px;">
                     <div style="margin:15px;">
                         <!-- Boton para abrir el modal -->
@@ -75,19 +75,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <hr>
                 </div>
             </div>
-            <div class="col-lg-9 container" style="margin:2%; margin-left:2%;">
+            <div class="order-2 col-lg-auto container" style="max-width:80%;margin:15px;">
                 <!-- Crear uno por actividad -->
-                <div style="display:flex; justify-content:start; flex-wrap:wrap;">
+                <div style="margin-left:15px;margin-top:10px;display:flex; justify-content:start; flex-wrap:wrap;">
                 <?php
                     foreach($listaActs as $actvs){
                         echo ('<div style="margin-right:5px;margin-bottom:5px;">
-                                    <div class="card" style="width: 18rem;">
-                                        <div style="height:125px;width:auto;overflow:hidden;margin-left:15px;margin-right:15px;margin-top:15px;">
-                                        <img src="' . $actvs['act_img'] . '" style="display:block; margin-left:auto; margin-right:auto; width:100%;">
+                                    <div class="card" style="width: 18rem; height:285px;">
+                                        <div style="max-height:125px;width:auto;overflow:hidden;margin-left:15px;margin-right:15px;margin-top:15px;">
+                                        <img src="' . $actvs['act_img'] . '" style="border-radius:5px;display:block; margin-left:auto; margin-right:auto; width:100%;">
                                         </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">' . $actvs['nombre'] . '</h5>
-                                            <p class="card-text">' . $actvs['descripcion'] . '</p>
+                                            <h5 class="card-title text-truncate" style="overflow:hidden;text-overflow:ellipsis;">' . $actvs['nombre'] . '</h5>
+                                            <p class="card-text">' . $actvs['ubicacion'] . '</p>
                                             <a href="./actividad_detalles.php?actcod=' . $actvs['act_codigo'] . '" class="btn btn-primary">Ver detalles</a>
                                         </div>
                                     </div>
@@ -119,11 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="mb-3">
                             <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                            <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio" required>
                         </div>
                         <div class="mb-3">
                             <label for="fechaCierre" class="form-label">Fecha de Cierre</label>
-                            <input type="date" class="form-control" id="fechaCierre" name="fechaCierre" required>
+                            <input type="datetime-local" class="form-control" id="fechaCierre" name="fechaCierre" required>
                         </div>
                         <div class="mb-3">
                             <label for="ubicacion" class="form-label">Ubicación</label>
