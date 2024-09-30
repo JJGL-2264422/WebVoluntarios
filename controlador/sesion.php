@@ -2,7 +2,7 @@
 
     session_start();
     if(!isset($_SESSION['usuario_activo'])){
-        header("location: /WebVol/WebVoluntarios/vista/formularios/login.php");
+        echo 'header("location:.'.$xpathSess.'/index.php")';
         die();
     }
 
