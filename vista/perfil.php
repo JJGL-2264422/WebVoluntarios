@@ -2,6 +2,8 @@
 include("../controlador/conectarBD.php");
 include("../controlador/sesion.php");
 $mensaje = "";
+$xpathNav = "";
+$xpathSess = ".";
 
 // Guardar etiquetas
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['guardar']) && isset($_POST['etiquetas'])) {
@@ -73,18 +75,9 @@ if ($statement->execute()) {
 </head>
 
 <body>
-  <nav class="navbar navbar-expand navbar-light bg-body-tertiary">
-    <div class="container-fluid">
-      <div class="nav navbar-nav">
-        <a class="navbar-brand" href="MenuPrincipal.php">Voluntarios S.A</a>
-        <a class="nav-item nav-link active" href="#">Perfil</a>
-        <a class="nav-item nav-link" href="./menu_actividades.php">Actividades</a>
-      </div>
-      <div class="nav navbar-nav">
-        <a class="nav-item nav-link" href="../controlador/cerrar_sesion.php">Cerrar sesión</a>
-      </div>
-    </div>
-  </nav>
+  <?php
+  include("../plantillas/navbar_actuser.php")
+  ?>
 
   <div class="container" style="margin-top:2%">
     <?php
@@ -99,7 +92,7 @@ if ($statement->execute()) {
         <div class="col-md-4 mt-1">
           <div class="card text-center sidebar">
             <div class="col-12 card bg-faded mt-2" style="overflow:hidden;">
-              <div style="height:125px; background-color:#5c5b5b"></div>
+              <div style="height:125px; background-color:#5c5b5b; padding-top:-10px"></div>
               <a class="bg-faded p-1 rounded-circle ml-3" style="height:100px; margin-top: -80px">
                 <img src="<?php echo $avatar; ?>" class="rounded-circle" style="height:125px; width:125px; border: 7px solid #303030; background-color:#303030" width="150">
               </a>

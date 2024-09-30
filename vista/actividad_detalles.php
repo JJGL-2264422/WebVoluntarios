@@ -2,6 +2,8 @@
 include("../controlador/conectarBD.php");
 include("../controlador/sesion.php");
 $actvID = $_GET['actcod'];
+$xpathNav = "";
+$xpathSess = "./";
 $fechaRegistro = date('Y-m-d H:i:s');
 
 
@@ -128,18 +130,10 @@ $inscritos = $inscritosStatement->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-  <nav class="navbar navbar-expand navbar-light bg-body-tertiary">
-    <div class="container-fluid">
-      <div class="nav navbar-nav">
-        <a class="navbar-brand" href="MenuPrincipal.php">Voluntarios S.A</a>
-        <a class="nav-item nav-link" href="./perfil.php">Perfil</a>
-        <a class="nav-item nav-link" href="./menu_actividades.php">Actividades</a>
-      </div>
-      <div class="nav navbar-nav">
-        <a class="nav-item nav-link" href="#">Cerrar sesión</a>
-      </div>
-    </div>
-  </nav>
+
+  <?php 
+  include("../plantillas/navbar_actuser.php");
+  ?>
 
   <div class="container" style="margin-top:2%;margin-bottom:2%">
     <div class="main">

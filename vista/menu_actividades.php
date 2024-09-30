@@ -1,6 +1,8 @@
 <?php
 include("../controlador/conectarBD.php");
 include("../controlador/sesion.php");
+$xpathNav = "";
+$xpathSess = ".";
 
 $SELsql = "SELECT * FROM actividades WHERE ac_activo = 1";
 $statement = $conn->prepare($SELsql);
@@ -19,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fechaInicio = $_POST['fechaInicio'];
     $fechaCierre = $_POST['fechaCierre'];
     $ubicacion = $_POST['ubicacion'];
-    
+
     $insertSql = "INSERT INTO actividades (nombre, descripcion, creador_id, act_rol, inicia_en, termina_en, ubicacion) 
                   VALUES (:nombre, :descripcion, :creador_id, :act_rol, :inicia_en, :termina_en, :ubicacion)";
-    
+
     $insertStatement = $conn->prepare($insertSql);
     $insertStatement->execute([
         ':nombre' => $nombre,
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':termina_en' => $fechaCierre,
         ':ubicacion' => $ubicacion,
     ]);
-    
+
     // Recargar después de guardar
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
@@ -41,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en" style="overflow-x: hidden; width:100%;">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,19 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Actividades</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand navbar-light bg-body-tertiary">     
-        <div class="container-fluid">
-            <div class="nav navbar-nav">
-                <a class="navbar-brand" href="MenuPrincipal.php">Voluntarios S.A</a>
-                <a class="nav-item nav-link" href="./perfil.php">Perfil</a>
-                <a class="nav-item nav-link active" href="#">Actividades <span class="sr-only">(current)</span></a>
-            </div>
-            <div class="nav navbar-nav">
-                <a class="nav-item nav-link" href="../controlador/cerrar_sesion.php">Cerrar sesión</a>
-            </div>
-        </div>
-    </nav>
+
+    <?php
+    include("../plantillas/navbar_actuser.php")
+    ?>
 
     <div class="content-wrapper container-fluid p-0">
         <div class="row no-gutters" style="min-height: 100vh;">
@@ -78,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="order-2 col-lg-auto container" style="max-width:80%;margin:15px;">
                 <!-- Crear uno por actividad -->
                 <div style="margin-left:15px;margin-top:10px;display:flex; justify-content:start; flex-wrap:wrap;">
-                <?php
-                    foreach($listaActs as $actvs){
+                    <?php
+                    foreach ($listaActs as $actvs) {
                         echo ('<div style="margin-right:5px;margin-bottom:5px;">
                                     <div class="card" style="width: 18rem; height:285px;">
                                         <div style="max-height:125px;width:auto;overflow:hidden;margin-left:15px;margin-right:15px;margin-top:15px;">
@@ -93,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>');
                     }
-                ?>
+                    ?>
                 </div>
             </div>
         </div>
@@ -143,7 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 <footer class="bg-secondary">
     <div style="margin-top: 15px;">
-        PLACEHOLDER PLACEHOLDER PLACEHOLDER
+        .
     </div>
 </footer>
+
 </html>

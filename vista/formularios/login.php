@@ -46,6 +46,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <nav class="navbar navbar-expand bg-dark ">
+        <div class="container-fluid">
+        <div class="nav navbar-nav">
+            <a class="navbar-brand text-white" href="../MenuPrincipal.php">Voluntarios S.A</a>
+        </div>
+        <div class="nav navbar-nav">
+            <a class="nav-item nav-link text-muted" href="../formularios/login.php">Iniciar sesión</a>
+            <a style="border-left:3px solid gray;"></a>
+            <a class="nav-item nav-link text-muted" href="../formularios/registro.php">Registrarse</a>
+        </div>
+        </div>
+    </nav>
+
     <div class="container" style="margin-top:50px;">
         <div class="row justify-content-center">
             <div class="col-md-4">

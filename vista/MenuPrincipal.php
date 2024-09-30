@@ -1,5 +1,7 @@
 <?php 
-    include("../navbar/dir_navbar.php");
+    session_start();
+    $xpathNav = "";
+    $xpathSess = ".";
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +13,14 @@
     <title>Voluntarios S.A</title>
 </head>
 <body>
- <?php 
-    incluir_navbar();
- ?><br>
-    <div class="container text-center" style="margin-bottom:80px;">
+    <?php 
+        if(isset($_SESSION['usuario_activo'])){
+            include("../plantillas/navbar_actuser.php");
+        }else{
+            include("../plantillas/navbar_offuser.php");
+        }
+    ?>
+    <div class="container text-center" style="margin-top:20px; margin-bottom:80px;">
         <div class="row ">
             <div class="col" style="margin-top:115px;">
                 <div id="carouselExample" class="carousel slide">
