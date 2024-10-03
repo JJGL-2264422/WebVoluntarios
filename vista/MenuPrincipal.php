@@ -1,6 +1,5 @@
 <?php 
     session_start();
-    $xpathNav = "";
     $xpathSess = ".";
  ?>
 <!DOCTYPE html>
@@ -14,9 +13,11 @@
 </head>
 <body>
     <?php 
-        if(isset($_SESSION['usuario_activo'])){
-            include("../plantillas/navbar_actuser.php");
+        if(isset($_SESSION['usuario_activo'])){ 
+            $xpathNav = "";
+            include("../plantillas/navbar_actuser.php"); 
         }else{
+            $xpathNav = "/formularios";
             include("../plantillas/navbar_offuser.php");
         }
     ?>
