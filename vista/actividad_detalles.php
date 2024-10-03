@@ -82,6 +82,7 @@ if ($statement->execute()) {
   $txInicio = $lista['inicia_en'];
   $txCierra = $lista['termina_en'];
   $txUbicacion = $lista['ubicacion'];
+  $etiquetas = $lista['act_etiquetas'];
 }
 
 // Obtener usuarios inscritos
@@ -149,6 +150,20 @@ $inscritos = $inscritosStatement->fetchAll(PDO::FETCH_ASSOC);
                 </form>
               <?php endif; ?>
             </div>
+            <div class="row" style="margin-left:1px">
+                <div class="col-md-12 text-light">
+                  <?php
+                  if (!empty($etiquetas)) {
+                    $listaEtiquetas = explode(", ", $etiquetas);
+                    foreach ($listaEtiquetas as $etiqueta) {
+                      echo "<span class='etiqueta'>" . $etiqueta . "</span>"; // Muestra cada etiqueta por separado
+                    }
+                  } else {
+                    echo "<p>No hay etiquetas disponibles.</p>";
+                  }
+                  ?>
+                </div>
+              </div>
             <div style="margin:10px">
               <img src="<?php echo $banner ?>" style="border-radius:10px;display:block; margin-left:auto; margin-right:auto; width:100%;">
             </div>
