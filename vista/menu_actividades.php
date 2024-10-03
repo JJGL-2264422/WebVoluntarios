@@ -15,15 +15,25 @@ $rolStatement = $conn->prepare($rolSql);
 $rolStatement->execute([':username' => $sesionid]);
 $rol = $rolStatement->fetchColumn();
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $fechaInicio = $_POST['fechaInicio'];
     $fechaCierre = $_POST['fechaCierre'];
     $ubicacion = $_POST['ubicacion'];
+    if (isset($_POST['etiquetas'])) {
+        $etiquetas = array_map(function ($etiqueta) {
+            return ucfirst(strtolower($etiqueta)); // Primera letra en mayúscula
+        }, $_POST['etiquetas']);
+        $etiquetasTexto = implode(", ", $etiquetas);
+    }else{
+        $etiquetasTexto = "";
+    }
 
-    $insertSql = "INSERT INTO actividades (nombre, descripcion, creador_id, act_rol, inicia_en, termina_en, ubicacion) 
-                  VALUES (:nombre, :descripcion, :creador_id, :act_rol, :inicia_en, :termina_en, :ubicacion)";
+
+    $insertSql = "INSERT INTO actividades (nombre, descripcion, creador_id, act_rol, inicia_en, termina_en, ubicacion, act_etiquetas) 
+                  VALUES (:nombre, :descripcion, :creador_id, :act_rol, :inicia_en, :termina_en, :ubicacion, :etiquetas)";
 
     $insertStatement = $conn->prepare($insertSql);
     $insertStatement->execute([
@@ -34,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':inicia_en' => $fechaInicio,
         ':termina_en' => $fechaCierre,
         ':ubicacion' => $ubicacion,
+        ':etiquetas' => $etiquetasTexto,
     ]);
 
     // Recargar después de guardar
@@ -59,9 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ?>
 
     <div class="content-wrapper container-fluid p-0">
-        <div class="row no-gutters" style="min-height: 100vh;">
-            <div class="order-1 col-2 sidebar d-flex flex-column bg-secondary" style="max-width: 300px;">
-                <div class="card" style="min-height: calc(100% - 20px); margin-left:10px; margin-top:10px; margin-bottom:10px;">
+        <div class="row no-gutters" style="min-height: 100vh; margin-left:10px;">
+            <div class="order-1 col-2 sidebar d-flex flex-column bg-secondary" style="max-width: 300px; margin-top:12px">
+                <div class="card" style="min-height: calc(100% - 20px); margin-left:2px; margin-top:10px; margin-bottom:10px;">
                     <div style="margin:15px;">
                         <!-- Boton para abrir el modal -->
                         <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#crearActividadModal">
@@ -124,6 +135,101 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="mb-3">
                             <label for="ubicacion" class="form-label">Ubicación</label>
                             <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+                        </div>
+                        <label for="etiquetas[]" class="form-label">Etiquetas</label>
+                        <div class="text-center" style="margin-bottom:15px;padding-bottom:7px; padding-top:7px;border:3px solid #454545">
+                            <div class="form-check form-check-inline" style="margin-left:7px">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Cocina" id="etiquetaCocina">
+                                <label class="form-check-label" for="etiquetaCocina">Cocina</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Animales domésticos" id="etiquetaAnimalesDomesticos">
+                                <label class="form-check-label" for="etiquetaAnimalesDomesticos">Animales domésticos</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Animales de granja" id="etiquetaAnimalesGranja">
+                                <label class="form-check-label" for="etiquetaAnimalesGranja">Animales de granja</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Niños" id="etiquetaNinos">
+                                <label class="form-check-label" for="etiquetaNinos">Niños</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Atención a personas mayores" id="etiquetaAtencionMayores">
+                                <label class="form-check-label" for="etiquetaAtencionMayores">Atención a personas mayores</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Manualidades" id="etiquetaManualidades">
+                                <label class="form-check-label" for="etiquetaManualidades">Manualidades</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Deportes" id="etiquetaDeportes">
+                                <label class="form-check-label" for="etiquetaDeportes">Deportes</label>
+                            </div>
+                            <div class="form-chec form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Enseñanza" id="etiquetaEnsenanza">
+                                <label class="form-check-label" for="etiquetaEnsenanza">Enseñanza</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Tecnología" id="etiquetaTecnologia">
+                                <label class="form-check-label" for="etiquetaTecnologia">Tecnología</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Fotografía" id="etiquetaFotografia">
+                                <label class="form-check-label" for="etiquetaFotografia">Fotografía</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Jardinería" id="etiquetaJardineria">
+                                <label class="form-check-label" for="etiquetaJardineria">Jardinería</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Traducción" id="etiquetaTraduccion">
+                                <label class="form-check-label" for="etiquetaTraduccion">Traducción</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Gestión de redes sociales" id="etiquetaGestionRedes">
+                                <label class="form-check-label" for="etiquetaGestionRedes">Gestión de redes sociales</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Escritura" id="etiquetaEscritura">
+                                <label class="form-check-label" for="etiquetaEscritura">Escritura</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Informática" id="etiquetaInformatica">
+                                <label class="form-check-label" for="etiquetaInformatica">Informática</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Comunicación" id="etiquetaComunicacion">
+                                <label class="form-check-label" for="etiquetaComunicacion">Comunicación</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Contabilidad" id="etiquetaContabilidad">
+                                <label class="form-check-label" for="etiquetaContabilidad">Contabilidad</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Salud y bienestar" id="etiquetaSaludBienestar">
+                                <label class="form-check-label" for="etiquetaSaludBienestar">Salud y bienestar</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Investigación" id="etiquetaInvestigacion">
+                                <label class="form-check-label" for="etiquetaInvestigacion">Investigación</label>
+                            </div>
+                            <div style="margin-top:5px;margin-bottom:5px;border-top:3px solid #454545"></div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Arte y creatividad" id="etiquetaArteCreatividad">
+                                <label class="form-check-label" for="etiquetaArteCreatividad">Arte y creatividad</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="etiquetas[]" value="Entretenimiento" id="etiquetaEntretenimiento">
+                                <label class="form-check-label" for="etiquetaEntretenimiento">Entretenimiento</label>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Crear Actividad</button>
                     </form>
